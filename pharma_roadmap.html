@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>설금홍 아카이브 — 약리학·약동학 5단계 로드맵</title>
+<style>
+:root{
+  --ink:#1a1a2e; --ink2:#3a3a5c; --ink3:#7a7a9a;
+  --paper:#fafaf7; --border:#e2e2da; --gold:#c9943a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;
+  background:var(--paper);color:var(--ink);font-size:16px;line-height:1.75;}
+
+/* 헤더 */
+.hero{background:var(--ink);color:#fff;padding:36px 20px 30px;text-align:center;}
+.hero-label{font-size:0.78rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:12px;font-weight:600;}
+.hero-title{font-size:clamp(1.3rem,4vw,1.9rem);font-weight:700;line-height:1.45;
+  margin-bottom:10px;}
+.hero-sub{font-size:0.88rem;color:rgba(255,255,255,0.6);margin-bottom:20px;}
+.hero-stats{display:flex;justify-content:center;gap:0;flex-wrap:wrap;
+  max-width:500px;margin:0 auto;border:1px solid rgba(255,255,255,0.15);
+  border-radius:10px;overflow:hidden;}
+.hero-stat{flex:1 0 100px;padding:12px 8px;text-align:center;
+  border-right:1px solid rgba(255,255,255,0.1);}
+.hero-stat:last-child{border-right:none;}
+.hero-stat-n{display:block;font-size:1.4rem;font-weight:700;color:var(--gold);}
+.hero-stat-l{display:block;font-size:0.68rem;color:rgba(255,255,255,0.5);margin-top:2px;}
+
+/* 혼란 포인트 박스 */
+.confusion-box{max-width:760px;margin:28px auto 0;padding:0 16px;}
+.confusion-inner{background:#fff;border:1px solid var(--border);border-radius:12px;
+  padding:22px 24px;}
+.confusion-title{font-size:0.82rem;font-weight:700;color:var(--gold);
+  letter-spacing:0.05em;text-transform:uppercase;margin-bottom:12px;}
+.confusion-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+@media(max-width:500px){.confusion-grid{grid-template-columns:1fr;}}
+.confusion-item{background:var(--paper);border-radius:8px;padding:12px 14px;
+  font-size:0.85rem;color:var(--ink2);line-height:1.6;}
+.confusion-item::before{content:"❓ ";}
+
+/* 네비게이션 */
+.nav-bar{max-width:760px;margin:20px auto 0;padding:0 16px;}
+.nav-inner{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;}
+.nav-btn{padding:8px 16px;border-radius:20px;font-size:0.8rem;font-weight:600;
+  text-decoration:none;color:#fff;transition:opacity 0.15s;}
+.nav-btn:hover{opacity:0.82;}
+
+/* 단계 카드 */
+.stages{max-width:760px;margin:24px auto 0;padding:0 16px;
+  display:flex;flex-direction:column;gap:20px;}
+.stage{border-radius:14px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.07);}
+.stage-header{padding:18px 20px;color:#fff;}
+.stage-num{font-size:0.72rem;font-weight:700;letter-spacing:0.12em;
+  opacity:0.75;margin-bottom:4px;}
+.stage-icon{font-size:1.6rem;margin-bottom:6px;}
+.stage-title{font-size:1.0rem;font-weight:700;line-height:1.4;margin-bottom:6px;}
+.stage-count{font-size:0.75rem;opacity:0.75;}
+.stage-body{border:2px solid;border-top:none;padding:20px 18px;}
+.why-box{background:rgba(255,255,255,0.7);border-radius:8px;padding:14px 16px;
+  margin-bottom:18px;}
+.why-label{font-size:0.75rem;font-weight:700;color:var(--ink3);
+  margin-bottom:7px;letter-spacing:0.04em;}
+.why-text{font-size:0.88rem;color:var(--ink2);line-height:1.8;}
+
+/* 글 버튼 */
+.article-list{display:flex;flex-direction:column;gap:9px;}
+.article-btn{display:flex;align-items:flex-start;gap:10px;
+  background:#fff;border:1px solid var(--border);border-radius:10px;
+  padding:14px 16px;text-decoration:none;color:inherit;
+  transition:box-shadow 0.15s,border-color 0.15s;
+  min-height:52px;}
+.article-btn:hover{box-shadow:0 3px 10px rgba(0,0,0,0.1);border-color:#aaa;}
+.article-tag{display:inline-block;flex-shrink:0;padding:3px 9px;
+  border-radius:5px;font-size:0.72rem;font-weight:700;margin-top:1px;}
+.tag-blog{background:#eef4fb;color:#3a6a9a;}
+.tag-cafe{background:#f3e8ff;color:#7040a0;}
+.article-title{flex:1;font-size:0.92rem;line-height:1.55;color:var(--ink);}
+.article-arrow{flex-shrink:0;font-size:0.9rem;color:#aaa;margin-top:2px;}
+
+/* 고지 */
+.disclaimer{max-width:760px;margin:28px auto 40px;padding:0 16px;}
+.disclaimer-inner{background:#fff3cd;border:1px solid #ffc107;border-radius:10px;
+  padding:18px 20px;font-size:0.85rem;color:#856404;line-height:1.75;}
+.disclaimer-title{font-weight:700;margin-bottom:6px;font-size:0.9rem;}
+
+/* 푸터 */
+footer{text-align:center;padding:24px 16px;font-size:0.75rem;
+  color:var(--ink3);border-top:1px solid var(--border);line-height:2;}
+footer a{color:var(--ink3);}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-label">설금홍 아카이브 · 약리학·약동학 로드맵</div>
+  <div class="hero-title">용도변경된 약의 항암 가능성<br>약리학·약동학으로 이해하는 5단계</div>
+  <div class="hero-sub">설금홍님의 671개 글에서 추려낸 54개 핵심 글</div>
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="hero-stat-n">5</span><span class="hero-stat-l">단계</span></div>
+    <div class="hero-stat"><span class="hero-stat-n">54</span><span class="hero-stat-l">선별 글</span></div>
+    <div class="hero-stat"><span class="hero-stat-n">671</span><span class="hero-stat-l">전체 글</span></div>
+  </div>
+</div>
+
+<div class="confusion-box">
+  <div class="confusion-inner">
+    <div class="confusion-title">🧭 이 로드맵이 답하는 질문들</div>
+    <div class="confusion-grid">
+      <div class="confusion-item">"이 약이 왜 암에 효과가 있다는 거야?" → 1단계</div>
+      <div class="confusion-item">"어떻게 먹어야 제대로 흡수돼?" → 2단계</div>
+      <div class="confusion-item">"같이 먹으면 안 되는 약이 있어?" → 3단계</div>
+      <div class="confusion-item">"실제로 어떤 프로토콜로 써?" → 4단계</div>
+      <div class="confusion-item">"부작용이나 독성은 얼마나 위험해?" → 5단계</div>
+      <div class="confusion-item">"어디서부터 시작해야 하지?" → 1단계부터</div>
+    </div>
+  </div>
+</div>
+
+<div class="nav-bar">
+  <div class="nav-inner">
+    <a class="nav-btn" style="background:#2d5a8e;" href="#stage1">🔬 1단계 · 기전</a>
+    <a class="nav-btn" style="background:#5a8a6a;" href="#stage2">💊 2단계 · 약동학</a>
+    <a class="nav-btn" style="background:#c9943a;" href="#stage3">⚗️ 3단계 · 조합</a>
+    <a class="nav-btn" style="background:#c0552a;" href="#stage4">🗺️ 4단계 · 프로토콜</a>
+    <a class="nav-btn" style="background:#6a3a8a;" href="#stage5">⚠️ 5단계 · 안전성</a>
+  </div>
+</div>
+
+<div class="stages">
+
+  <div class="stage" id="stage1">
+    <div class="stage-header" style="background:#2d5a8e;">
+      <div class="stage-num">STEP 1</div>
+      <div class="stage-icon">🔬</div>
+      <div class="stage-title">왜 암에 가능성이 있는가? — 작용 기전(Pharmacodynamics) 이해</div>
+      <div class="stage-count">12개 글</div>
+    </div>
+    <div class="stage-body" style="background:#eef4fb;border-color:#3a6a9a;">
+      <div class="why-box">
+        <div class="why-label">📌 왜 지금 이 단계인가?</div>
+        <div class="why-text">약을 먹기 전에 가장 먼저 알아야 할 것은 "이 약이 암세포에 어떻게 작용하는가"입니다. 기전을 모르면 막연한 믿음으로 복용하게 되고, 기전을 알면 내 암의 특성과 맞는지 스스로 판단할 수 있습니다. mTOR, 미세소관, 와버그 효과, 미토콘드리아 억제... 처음에는 낯설지만, 이 글들을 읽고 나면 "왜 구충제가 암에 관심을 받는지"가 이해됩니다.</div>
+      </div>
+      <div class="article-list">
+        
+        <a href="https://blog.naver.com/grsanga/222538578175" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">암 줄기세포 억제제 요약편</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/223642370191" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">13장. 세포 억제 개념을 지원하는(암세포를 죽이는) 약물 : Mark Lintern [책] 암 해결 방법?</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/223734606692" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">이버멕틴의 항암 효과 : 작용 기전과 치료적 시사점</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/223888527843" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">라파마이신=시롤리무스, mTOR 억제제, 항노화 작용, 항암 작용</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/223565213048" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">2장. 현실을 엿보다, DNA 이론의 모순, 와버그 효과, 포도당 제한, 케톤 생성 식단 : Mark Lintern [책] 암 해결 방법?</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/222856840169" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">이버멕틴의 항균력과 면역조절에 관한 특징</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/223590983411" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">8장. 암의 형성 과정, 암의 특징, 홀마크 재배치, 대사이론과 DNA이론 : Mark Lintern [책] 암 해결 방법?</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/223900815966" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">암과 노화, mTOR 억제제, 메트포르민, 라파마이신과 그 유도체, 이트라코나졸, 이버멕틴, 니클로사미드, 그리고...</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/223484248107" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">10-1장. 미생물 관련성, 발암의 일관성, 면역 억제, 염증, 젖산, 철분 : Mark Lintern [책] 암 해결 방법?</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/222963691684" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">암을 함정(와버그 트랩)에 빠뜨릴 수 있는 미토콘드리아 억제제 목록</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/223902488839" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">성장과 노화 : 공통 분자 메커니즘 : mTOR 경로, 라파마이신</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/223353438843" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">암에 대한 피세틴(fisetin)의 효과 및 기전, 세놀리틱 약물, 항노화</span>
+          <span class="article-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="stage" id="stage2">
+    <div class="stage-header" style="background:#5a8a6a;">
+      <div class="stage-num">STEP 2</div>
+      <div class="stage-icon">💊</div>
+      <div class="stage-title">얼마나 흡수되는가? — 약동학(Pharmacokinetics) 핵심</div>
+      <div class="stage-count">10개 글</div>
+    </div>
+    <div class="stage-body" style="background:#f0f7f2;border-color:#5a8a6a;">
+      <div class="why-box">
+        <div class="why-label">📌 왜 지금 이 단계인가?</div>
+        <div class="why-text">"먹으면 실제로 몸에서 얼마나 작동하는가"가 약동학(PK)입니다. 아무리 좋은 약이라도 흡수가 안 되면 소용이 없습니다. 이버멕틴은 지방과 함께 먹어야 생체이용률이 높아지고, 펜벤다졸은 나노입자 형태가 더 잘 흡수됩니다. 이 단계에서는 흡수·분포·대사·배설(ADME)의 실전 지식을 쌓습니다.</div>
+      </div>
+      <div class="article-list">
+        
+        <a href="https://blog.naver.com/grsanga/222907120631" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">이버멕틴 약동학 ; 흡수, 분포, 대사, 제거. 안전성</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/223163075814" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">이버멕틴과 알벤다졸, 아지스로마이신의 병용 투여에 관한 이야기</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/224080118942" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">단기간 라파마이신 투여후 암컷 마우스의 흉선 재생</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/223197792445" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">코로나 감염시 이버멕틴 투여는 후유증을 최소화 시킬 수 있다? 호흡곤란, "뇌 안개", 염증, 응고병증, 지속적인 피로, 후각 및 미각 상실, 이명, 관절, 근육통 등</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/222909233176" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">경구 이버멕틴의 약동학에 대한 음식의 영향</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://cafe.naver.com/friendsofhippocrates/15293" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-cafe">카페</span>
+          <span class="article-title">약물 순환 : 각종 경로로 투여된 약물의 혈관 순환 경로 : 약물의 흡수 : 부제=항문으로 약을 넣으면 어디로 갈까?</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://cafe.naver.com/friendsofhippocrates/10163" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-cafe">카페</span>
+          <span class="article-title">이버멕틴 투여량 그리고 클로로퀸과의 병용문제</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://cafe.naver.com/friendsofhippocrates/8415" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-cafe">카페</span>
+          <span class="article-title">약의 흡수. 항암구충제 복용법</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://cafe.naver.com/friendsofhippocrates/8399" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-cafe">카페</span>
+          <span class="article-title">항암구충약물의 체내흡수율을 높이기 위한 방법과 나노입자시스템</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://cafe.naver.com/friendsofhippocrates/8009" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-cafe">카페</span>
+          <span class="article-title">메벤다졸 NIH 임상에서 투여되는 용량은 얼마일까요?</span>
+          <span class="article-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="stage" id="stage3">
+    <div class="stage-header" style="background:#c9943a;">
+      <div class="stage-num">STEP 3</div>
+      <div class="stage-icon">⚗️</div>
+      <div class="stage-title">같이 먹어도 되는가? — 약물 상호작용 & 조합 전략</div>
+      <div class="stage-count">10개 글</div>
+    </div>
+    <div class="stage-body" style="background:#fef9ee;border-color:#c9943a;">
+      <div class="why-box">
+        <div class="why-label">📌 왜 지금 이 단계인가?</div>
+        <div class="why-text">용도변경 약들은 대부분 단독보다 조합으로 쓰입니다. 하지만 조합이 잘못되면 효과가 상쇄되거나 독성이 생깁니다. 이버멕틴은 CYP3A4를 통해 대사되기 때문에 같은 경로를 쓰는 약과 충돌할 수 있습니다. 폴 마릭, 제프리 닥 등 전문가들이 제안하는 "해도 되는 조합"과 "피해야 할 조합"을 이 단계에서 파악하세요.</div>
+      </div>
+      <div class="article-list">
+        
+        <a href="https://blog.naver.com/grsanga/223136776119" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">국내 의대와 병원 : 췌장암에 이버멕틴과 젬시타빈 병용 치료 연구</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/223809236398" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">폴 마릭의 책 [암 치료] 2판에 추가된 핵심 용도 변경 약물 : 이버멕틴, 다양한 항암 효과</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/223299570452" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">[Paul E. Marik] 암 치료 Cancer Care : 하지 말것을 권장하는 약물 : 비타민B복합체, 콜히친, 상어연골, 아미그달린(라에트릴)</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/223304841257" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">이버멕틴과 인간 시토크롬 P450 효소 및 약물 전달체의 대사와 상호작용, 가능한 부작용 및 독성 효과</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/223938375852" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">라파마이신과 음식, 음료, 보충제, 약물의 상호작용, 생체 이용률 향상</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/223804533685" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">폴 마릭의 책 [암 치료] 2판에 추가된 핵심 용도 변경 약물 : 프로프라놀올, 전이 방지</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/223768629635" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">[해외호전사례] 로잘린드(Rosalind) 82세 여성, 대장암 4기 (3년전에) - 조티펜스 복용법 (친구가 알려줌, 4개 팩의 펜벤다졸과 함께)</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/222989920518" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">[하다 마사토] 흉수및 복수 사례에 탈리도마이드, 셀레콕시브,이리노테칸 및 시스플라틴(CDDP)의 조합</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/223668479918" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">기저세포암(basal cell carcinoma)에 대한 이트라코나졸과 비스모데깁의 조합, 이트라코나졸 단독 치료</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/223196840476" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">닭 붉은 진드기 박멸을 위한 이버멕틴과 알리신 병용 처리의 효과</span>
+          <span class="article-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="stage" id="stage4">
+    <div class="stage-header" style="background:#c0552a;">
+      <div class="stage-num">STEP 4</div>
+      <div class="stage-icon">🗺️</div>
+      <div class="stage-title">실제로 어떻게 쓰는가? — 실전 프로토콜 & 복용법</div>
+      <div class="stage-count">12개 글</div>
+    </div>
+    <div class="stage-body" style="background:#fdf3ee;border-color:#c0552a;">
+      <div class="why-box">
+        <div class="why-label">📌 왜 지금 이 단계인가?</div>
+        <div class="why-text">기전·흡수·조합을 이해했다면 이제 실전입니다. 조티펜스 프로토콜, 제인의 대사 치료법, 폴 마릭의 Cancer Care, 제프리 닥의 Cracking Cancer... 세계 환자들이 실제로 사용한 프로토콜들을 비교하며 내 상황에 맞는 것을 고르세요. "얼마나", "어떻게", "언제" 먹는지가 구체적으로 나와 있습니다.</div>
+      </div>
+      <div class="article-list">
+        
+        <a href="https://blog.naver.com/grsanga/223093504143" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">이트라코나졸의 각종 암에 대한 효과와 실전 사용 용량</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/223104648931" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">[제프리 닥] 각종 암 치료를 위한 용도 변경 약물 프로토콜 요약. "Cracking cancer tool kit"</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/223449503704" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">항암을 위한 빠른 시작 복용법[Quick Start Protocol], 펜벤다졸 암 지원 그룹에서 작성됨</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/223826476245" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">폴 마릭의 책 [암 치료] 2판 : 항암 용도 변경 약물 요약과 암 전이와 재발 방지를 위한 제안</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/222555070124" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">조티펜스 프로토콜 최신 갱신 정보(펜벤다졸)</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/222697744254" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">[제프리 닥] 크래킹 캔서 툴 킷트 : 항암 대체약물들의 용법과 경로 표적, 특징에 관한 요약</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/224005548190" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">폴 마릭 [Cancer Care] 각 암종별 용도변경 약물 활용 요약(25년 8월 업데이트)</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/222985741092" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">전립선암 치료에 효과 있는 항암 대체 약물 목록과 각종 프로토콜</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/223985212073" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">커트 그레이든 마이클의 아르테미시닌 암 치료 프로토콜</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/223962532697" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">암 치료에 관한 세계인들의 항암 프로토콜과 중요 약물 요약 정리</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/222922407190" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">암환자는 우루사를 먹어야 할까? : 담즙산과 UDCA, TUDCA와 암과의 관계</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/223362711960" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">[Paul E. Marik] 암 치료 Cancer Care : 먹어야 할 것과 먹지 말아야 할 것. 대사 및 생활 습관 중재</span>
+          <span class="article-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="stage" id="stage5">
+    <div class="stage-header" style="background:#6a3a8a;">
+      <div class="stage-num">STEP 5</div>
+      <div class="stage-icon">⚠️</div>
+      <div class="stage-title">얼마나 안전한가? — 독성·부작용·안전성 판단</div>
+      <div class="stage-count">10개 글</div>
+    </div>
+    <div class="stage-body" style="background:#f5f0fb;border-color:#6a3a8a;">
+      <div class="why-box">
+        <div class="why-label">📌 왜 지금 이 단계인가?</div>
+        <div class="why-text">"안전하다"는 말을 맹신하는 것도, "위험하다"는 말에 포기하는 것도 둘 다 위험합니다. 이버멕틴의 고용량 안전성, 라파마이신의 면역억제 부작용, 경피 흡수로 인한 독성 사례... 실제 데이터를 기반으로 "어떤 조건에서 위험해지는가"를 파악하고, 복용 중 주의해야 할 신호들을 미리 알아두세요.</div>
+      </div>
+      <div class="article-list">
+        
+        <a href="https://blog.naver.com/grsanga/223175466202" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">고지혈증 진단 기준과 처방약, 새로운 콜레스테롤 목표와 사망률</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/223149784621" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">이버멕틴 중독의 성공적인 관리 : 고용량에도 안정성과 내약성이 있다</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/224104491676" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">경피 이버멕틴 중독으로 인한 사망: 증례 보고 및 문헌 검토</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/223919388080" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">[라파마이신 뉴스] 라파마이신의 부작용</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/222783934104" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">[제이슨 R. 윌리엄스] 10편. 면역 관련 부작용 및 암 면역 요법의 부작용. (해외책) The Immunotherapy Revolution</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/222790983207" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">장내 미생물총을 표적으로 한 면역치료 반응, 독성 조절에 관한 최근 연구.</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://blog.naver.com/grsanga/223078366917" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-blog">블로그</span>
+          <span class="article-title">부작용 빈도와 관련된 단어의 의미</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://cafe.naver.com/friendsofhippocrates/15881" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-cafe">카페</span>
+          <span class="article-title">이버멕틴의 부작용에 관한 내용, 암 치료를 위한 용량은?</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://cafe.naver.com/friendsofhippocrates/13453" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-cafe">카페</span>
+          <span class="article-title">이버멕틴 고용량 장기복용에 관한 자료</span>
+          <span class="article-arrow">→</span>
+        </a>
+
+        <a href="https://cafe.naver.com/friendsofhippocrates/11162" target="_blank" rel="noopener" class="article-btn">
+          <span class="article-tag tag-cafe">카페</span>
+          <span class="article-title">이버멕틴 부작용 종합과 고용량 안정성에 관한 자료</span>
+          <span class="article-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="disclaimer">
+  <div class="disclaimer-inner">
+    <div class="disclaimer-title">⚠️ 반드시 읽어주세요</div>
+    이 자료는 설금홍님의 블로그·카페 게시글을 주제별로 분류한 정보 참고용 로드맵입니다.
+    의학적 진단, 치료 결정, 복용량 결정의 근거로 사용할 수 없습니다.
+    <br><br>
+    <strong>이 자료에 소개된 약물들은 반드시 담당 전문의와 상의하여 사용 여부를 결정하세요.</strong>
+    개인의 기저 질환, 복용 중인 약물, 암종 및 병기에 따라 적합성이 크게 다를 수 있습니다.
+  </div>
+</div>
+
+<footer>
+  원본 자료: 설금홍 블로그
+  <a href="https://blog.naver.com/grsanga" target="_blank">blog.naver.com/grsanga</a>
+  &nbsp;·&nbsp;
+  <a href="https://health-tumor.tistory.com/" target="_blank">health-tumor.tistory.com</a><br>
+  <a href="https://cafe.naver.com/friendsofhippocrates" target="_blank">히포크라테스의 친구들 카페</a>
+  &nbsp;·&nbsp;
+  로드맵 구성: 꿈많은사람2 (David Kang) 2026
+</footer>
+
+</body>
+</html>
